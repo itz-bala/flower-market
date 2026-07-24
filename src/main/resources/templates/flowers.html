@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Flower Management</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-success">
+
+<div class="container-fluid">
+
+<a class="navbar-brand fw-bold">
+🌸 Flower Inventory Dashboard
+</a>
+
+</div>
+
+</nav>
+
+<div class="container mt-4">
+
+<h2 class="mb-4">
+🌹 Flower Management
+</h2>
+
+<form th:action="@{/saveFlower}" th:object="${flower}" method="post">
+
+<input type="hidden" th:field="*{id}">
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+th:field="*{flowerName}"
+placeholder="Flower Name">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+th:field="*{category}"
+placeholder="Category">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+type="number"
+step="0.01"
+th:field="*{price}"
+placeholder="Price">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+type="number"
+th:field="*{stockQuantity}"
+placeholder="Stock Quantity">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+type="number"
+th:field="*{minimumStock}"
+placeholder="Minimum Stock">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control"
+th:field="*{supplier}"
+placeholder="Supplier">
+</div>
+
+</div>
+
+<button class="btn btn-success">
+Save Flower
+</button>
+
+</form>
+
+<hr>
+
+<form th:action="@{/search}" method="get">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<input
+class="form-control"
+name="keyword"
+placeholder="Search Flower">
+
+</div>
+
+<div class="col-md-3">
+
+<button class="btn btn-primary w-100">
+Search
+</button>
+
+</div>
+
+<div class="col-md-3">
+
+<a href="/flowers"
+class="btn btn-secondary w-100">
+
+Clear
+
+</a>
+
+</div>
+
+</div>
+
+</form>
+
+<hr>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-success">
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Supplier</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr th:each="flower : ${flowers}">
+
+<td th:text="${flower.id}"></td>
+<td th:text="${flower.flowerName}"></td>
+<td th:text="${flower.category}"></td>
+<td th:text="${flower.price}"></td>
+<td th:text="${flower.stockQuantity}"></td>
+<td th:text="${flower.supplier}"></td>
+
+<td>
+
+<a class="btn btn-warning btn-sm"
+th:href="@{/edit/{id}(id=${flower.id})}">
+
+Edit
+
+</a>
+
+<a class="btn btn-danger btn-sm"
+th:href="@{/delete/{id}(id=${flower.id})}">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

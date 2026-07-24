@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Supplier Management</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-success">
+
+<div class="container-fluid">
+
+<a class="navbar-brand">
+🚚 Supplier Management
+</a>
+
+<a href="/dashboard" class="btn btn-light">
+Dashboard
+</a>
+
+</div>
+
+</nav>
+
+<div class="container mt-4">
+
+<h2>Add Supplier</h2>
+
+<form th:action="@{/saveSupplier}" th:object="${supplier}" method="post">
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+<input class="form-control" th:field="*{supplierName}" placeholder="Supplier Name">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control" th:field="*{phone}" placeholder="Phone">
+</div>
+
+<div class="col-md-4 mb-3">
+<input class="form-control" th:field="*{email}" placeholder="Email">
+</div>
+
+<div class="col-md-6 mb-3">
+<input class="form-control" th:field="*{address}" placeholder="Address">
+</div>
+
+<div class="col-md-6 mb-3">
+<input class="form-control" th:field="*{flowerType}" placeholder="Flower Type">
+</div>
+
+<div class="col-md-12">
+<button class="btn btn-success">
+Save Supplier
+</button>
+</div>
+
+</div>
+
+</form>
+
+<hr>
+
+<h3>Supplier List</h3>
+
+<table class="table table-bordered table-hover">
+
+<thead class="table-success">
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Address</th>
+<th>Flower Type</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr th:each="supplier : ${suppliers}">
+
+<td th:text="${supplier.id}"></td>
+<td th:text="${supplier.supplierName}"></td>
+<td th:text="${supplier.phone}"></td>
+<td th:text="${supplier.email}"></td>
+<td th:text="${supplier.address}"></td>
+<td th:text="${supplier.flowerType}"></td>
+
+<td>
+
+<a class="btn btn-danger btn-sm"
+th:href="@{/deleteSupplier/{id}(id=${supplier.id})}">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</body>
+</html>
