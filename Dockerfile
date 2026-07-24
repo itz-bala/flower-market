@@ -2,11 +2,11 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY . .
+COPY target/*.jar app.jar
 
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
 
-EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","target/flower-market-0.0.1-SNAPSHOT.jar"]
+
+EXPOSE 8020
+
+ENTRYPOINT ["java","-jar","app.jar"]
